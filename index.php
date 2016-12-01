@@ -1,34 +1,46 @@
-<?
-include('decimals.php');
-$seed = 78;
-$length = 200;
-$string = substr(preg_replace('/[^1-6]/','',$pi_decimals),$seed);
-$array = preg_split('//',$string);
-foreach ($array as $k=>$v) {
-  if ($k%3 == 0) { 
-    $newstring .= $v;
-  }
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+@import url("dice3.css");
+body { background-color: darkgreen; }
+.button {
+ padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 10px;
+ }
+
+#roll { background-color: brown; color: white; 
+font-size: 200%;
+width: 5em;
+border: 2px solid gold;
 }
-$newstring = substr($newstring,0,$length);
-$items = array();
-for ($i=0; $i<$length; $i+=2) {
-  $one = substr($newstring,$i,1);
-  $two = substr($newstring,$i+1,1);
-  array_push($items, '['.$one.','.$two.']');
-}
-$js = join(',',$items);
-?>
+#result { 
+margin-top: 1em;
+width: 10em;
+ } 
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<?php
+   $js = file_get_contents('http://kenirwin.net/projects/reroll/api.php?'.$_SERVER['QUERY_STRING']);
+?>
 <script>
 $(document).ready(function() {
-    var a = [<?=$js;?>];
+    var a = <?=$js;?>;
     var i = 0;
+    var words = ['zero','one','two','three','four','five','six']
     $('#roll').click(function() {
-	$('#result').html(a[i][0]+' '+a[i][1]);
+	var i1 = a[i][0];
+	var i2 = a[i][1];
+	//	$('#result').html(a[i][0]+' '+a[i][1]);
+	$('#first').removeAttr('class').addClass('die '+words[i1]);
+	$('#second').removeAttr('class').addClass('die '+words[i2]);
 	i++;
       });
   });
 </script>
-
-<div id="roll">Roll</div>
-<div id="result"></div>
+<body>
+<center><div id="roll" class="button">Roll</div>
+<div id="result"><div id="first"></div> <div id="second"></div></div>
+</center>
+</body>
