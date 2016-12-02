@@ -22,7 +22,8 @@ width: 10em;
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <?php
-$json = file_get_contents('http://kenirwin.net/dev/reroll/api.php?'.$_SERVER['QUERY_STRING']);
+$path = $_SERVER['REQUEST_SCHEME'] .'://'.$_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']);
+$json = file_get_contents($path.'/api.php?'.$_SERVER['QUERY_STRING']);
 $obj = json_decode($json);
 $seed = $obj->seed;
 ?>
