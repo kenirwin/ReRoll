@@ -1,4 +1,4 @@
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <style type="text/css">
 @import url("dice3.css");
 body { background-color: darkgreen; color: #fff}
