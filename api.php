@@ -19,6 +19,7 @@ if (isset($_REQUEST['num_dice'])) {
 else {
   $num_dice = 2;
 }
+$newstring = '';
 $string = substr(preg_replace('/[^1-6]/','',$pi_decimals),$seed);
 $array = preg_split('//',$string);
 foreach ($array as $k=>$v) {
