@@ -29,10 +29,11 @@ foreach ($array as $k=>$v) {
 $newstring = substr($newstring,0,$length);
 $items = array();
 for ($i=0; $i<$length; $i+=2) {
-  $one = substr($newstring,$i,1);
-  $two = substr($newstring,$i+1,1);
-  array_push($items, '['.$one.','.$two.']');
+  $one = (int)substr($newstring,$i,1);
+  $two = (int)substr($newstring,$i+1,1);
+  //  array_push($items, '['.$one.','.$two.']');
+  array_push($items, array($one,$two));
 }
-$js = join(',',$items);
-print '['.$js.']';
+$response = array('seed'=>$seed,'num_dice'=>$num_dice,'length'=>$length,'rolls'=>$items);
+print (json_encode($response));
 ?>

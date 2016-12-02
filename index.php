@@ -22,18 +22,14 @@ width: 10em;
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <?php
-if (isset($_REQUEST['seed'])) {
-  $seed = $_REQUEST['seed'];
-}
-else { 
-  $seed = rand(1,100);
-}
-//$js = file_get_contents('http://kenirwin.net/projects/reroll/api.php?'.$_SERVER['QUERY_STRING']);
-$js = file_get_contents('http://kenirwin.net/projects/reroll/api.php?seed='.$seed);
+$json = file_get_contents('http://kenirwin.net/dev/reroll/api.php?'.$_SERVER['QUERY_STRING']);
+$obj = json_decode($json);
+$seed = $obj->seed;
 ?>
 <script>
 $(document).ready(function() {
-    var a = <?=$js;?>;
+    var obj = <?=$json;?>;
+    var a = obj.rolls;
     var i = 0;
     var words = ['zero','one','two','three','four','five','six']
     $('#roll').click(function() {
